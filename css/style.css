@@ -1,0 +1,164 @@
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary {
+    display: block;
+}
+
+.header:after {content:"";height:10;display:block;visibility:hidden;clear:both;}
+.header {background: #932928; border-bottom: 3px solid #db7a78;}
+.header .branding-title {
+    float: left;
+    margin: 0;
+    font: 0/0 serif;
+    text-shadow: none; 
+    color: transparent; 
+    width: 120px; /* Adjusted width to a smaller size */
+    height: 100px; /* Adjusted height to a smaller size */
+    background: url(../img/book-vault-logo.png)  0px  no-repeat; /* Adjusted background position */
+    background-size: 119px auto; /* Increase the size of the background image */
+    padding: 0;
+}
+
+.header .branding-title a {
+    display: block;
+    height: 10px;
+    width: 20px;
+}
+
+.header .nav {
+    float: right;
+    top: 10;
+    right: 0;
+    margin: 0;
+    position: relative;
+    left: 0px;
+    z-index: 99999999;
+    white-space: nowrap; /* Prevent line breaks */
+}
+
+.header .nav li {
+    display: inline-block;
+    margin: 0;
+    list-style: none;
+    margin-right: 20px; /* Set equal margin-right */
+}.header .nav li a {
+    color: white;
+    display: block;
+    line-height: 30px;
+    padding: 2px 0 0;
+    width: 100px;
+    background: url('../img/book-vault-logo.png') no-repeat 0px 60px;
+    white-space: nowrap; /* Prevent line breaks */
+    text-align: center; /* Center align the text */
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    text-decoration: none; /* Remove underline */
+}
+
+.header .nav li.books:hover a,
+.header .nav li.books a:active,
+.header .nav li.movies:hover a,
+.header .nav li.movies a:active,
+.header .nav li.music:hover a,
+.header .nav li.music a:active,
+.header .nav li.muzic:hover a,
+.header .nav li.muzic a:active,
+.header .nav li.suggest:hover a,
+.header .nav li.suggest a:active {
+    opacity: 0.2; /* Adjust the opacity value as needed */
+}
+
+
+.books a {
+    float: right; /* Float the anchor element to the right */
+    margin-left: 70px; /* Adjust margin as needed */
+}
+.movies a {
+    float: right; /* Float the anchor element to the right */
+    margin-left: 70px; /* Adjust margin as needed */
+}
+.music a {
+    float: right; /* Float the anchor element to the right */
+    margin-left: 70px; /* Adjust margin as needed */
+}
+.muzic a {
+    float: right; /* Float the anchor element to the right */
+    margin-left: 70px; /* Adjust margin as needed */
+}
+.suggest a {
+    float: right; /* Float the anchor element to the right */
+    margin-left: 70px; /* Adjust margin as needed */
+}
+
+
+
+
+
+
+.fa-solid {font-family: 'Font Awesome 5 Free'; font-weight: 900; font-size: 20px;}
+
+
+
+.wrapper {width: 980px; margin: 0 auto;}
+
+#content {padding: 20px 0 80px;}
+
+html {overflow-y: scroll; overflow-x: hidden;}
+body {font-family: 'Open Sans', sans-serif; background:#f0eeed; color: #676767;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer {
+    background: #f0eeed;
+    border-top: 3px solid #dddddd;
+    padding: 42px 0;
+    font-size: 12px;
+    color: #a5a5a5;
+}
+.footer ul {margin: 0; padding: 0; float: left;}
+.footer ul li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+}
+.footer ul li:after {content:" | "}
+.footer ul li:last-child:after {content:"";}
+.footer p {margin: 0; padding-right: 3px;}
+.footer a {text-decoration: none; color: #539def; margin: 0 10px;}
+.footer li:first-child a {margin-left: 4px;}
+.footer a:hover, .footer a:active {text-decoration: underline;}
