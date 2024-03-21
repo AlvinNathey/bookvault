@@ -40,7 +40,7 @@
                         </i>    Current Read</a></li>
 
                 <li class="suggest">
-                    <a href="suggest.php">
+                    <a href="search.php">
                         <i class="fa-solid fa-magnifying-glass">
                         </i>    Search Book</a></li>
             </ul>
