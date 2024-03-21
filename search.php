@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
-form {
+    form {
   text-align: center;
   margin-top: 30px;
 }
@@ -42,7 +42,7 @@ button {
 .book-details {
   text-align: center;
 }
-/* Loading animation */
+/* Add this CSS for the loader */
 .loader {
   border: 6px solid #f3f3f3; /* Light grey */
   border-top: 6px solid #3498db; /* Blue */
@@ -51,6 +51,7 @@ button {
   height: 30px;
   animation: spin 1s linear infinite;
   margin: 0 auto;
+  display: none; /* Hide initially */
 }
 
 @keyframes spin {
@@ -65,6 +66,8 @@ button {
 <input type="text" name="search" placeholder="Search for a book">
 <button type="submit" name="submit-search"><i class="fa-solid fa-search"></i></button>
 </form>
+<!-- Add the loader div here -->
+<div class="loader"></div>
 <div class="book-list">
 <?php
 // Function to search for books on Open Library API
@@ -140,7 +143,19 @@ if (isset($_GET['submit-search'])) {
     echo "<script>document.querySelector('.loader').style.display = 'none';</script>";
 }
 ?>
+
 </div>
 <?php include("body/footer.php"); ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Hide the loader when the document is loaded
+  document.querySelector('.loader').style.display = 'none';
+});
+
+// Show the loader when the search button is clicked
+document.querySelector('form').addEventListener('submit', function() {
+  document.querySelector('.loader').style.display = 'block';
+});
+</script>
 </body>
 </html>
