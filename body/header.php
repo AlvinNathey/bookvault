@@ -36,8 +36,8 @@
 
                 <li class="muzic">
                     <a href="catalog.php?cat=music">
-                        <i class="fa-solid fa-book-open-reader">
-                        </i>    Current Read</a></li>
+                      
+                        </i> </a></li>
 
                 <li class="suggest">
                     <a href="search.php">
