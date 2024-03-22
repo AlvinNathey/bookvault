@@ -12,14 +12,14 @@
   margin-top: 30px;
 }
 input[type="text"] {
-  width: 40%;
+  width: 80%;
   padding: 15px;
   border-radius: 10px;
   font-size: 15px;
   border: 1px solid #ccc;
 }
 button {
-  padding: 15px 20px;
+  padding: 20px 30px 50px 30px;
   background-color: #708ee6;
   color: white;
   border: none;
@@ -32,6 +32,7 @@ button {
   border-radius: 10px;
   margin: 10px;
   padding: 10px;
+  cursor: pointer; /* Add cursor pointer for clickable effect */
 }
 .book-container img {
   width: 200px; /* Adjust the image size as needed */
@@ -59,103 +60,94 @@ button {
   100% { transform: rotate(360deg); }
 }
 </style>
+
+<script>
+// Function to show book details when a book is clicked
+function showBookDetails(bookId) {
+    window.location.href = 'show-book-details.php?bookId=' + bookId;
+}
+</script>
+
 </head>
 <body>
 <?php include("body/header.php"); ?>
-<form method="get" action="">
-<input type="text" name="search" placeholder="Search for a book">
-<button type="submit" name="submit-search"><i class="fa-solid fa-search"></i></button>
-</form>
-<!-- Add the loader div here -->
-<div class="loader"></div>
 <div class="book-list">
+<form method="get" action="">
+    <input type="text" name="search" placeholder="Search for a book">
+    <button type="submit" name="submit-search"><i class="fa-solid fa-search"></i></button>
+</form>
+
+
+<div class="loader"></div>
+
 <?php
-// Function to search for books on Open Library API
 function searchBooks($query) {
-// Base URL for the Open Library API
-$base_url = 'https://openlibrary.org/search.json?q=';
-// Construct the full URL with the search query
-$url = $base_url . urlencode($query);
-// Perform the API request
-$response = file_get_contents($url);
-// Check if the response is successful
-if ($response === false) {
-return false;
+    $base_url = 'https://www.googleapis.com/books/v1/volumes?q=';
+    $url = $base_url . urlencode($query);
+    $response = file_get_contents($url);
+    if ($response === false) {
+        return false;
+    }
+    $data = json_decode($response, true);
+    if (!$data || !isset($data['items'])) {
+        return false;
+    }
+    return $data['items'];
 }
-// Decode the JSON response
-$data = json_decode($response, true);
-// Check if the data is valid
-if (!$data || !isset($data['docs'])) {
-return false;
-}
-// Extract and return the list of books
-return $data['docs'];
-}
-// Check if the search form is submitted
 if (isset($_GET['submit-search'])) {
-    // Get the search query from the form
     $query = $_GET['search'];
-    // Display loading animation while fetching data
     echo "<div class='loader'></div>";
-    // Search for books based on the query
     $books = searchBooks($query);
-    // Check if there are any books found
     if ($books === false || empty($books)) {
         echo "No books found for the query: $query";
     } else {
-        // Display the available books
         echo "<div class='book-list'>";
         echo "<h5 style='text-align: center'>Search Results for: $query</h5>";
         foreach ($books as $book) {
-            echo "<div class='book-container'>";
-            
-            // Check if cover_edition_key exists and fetch cover image
-            if (isset($book['cover_edition_key'])) {
-                $cover_url = "https://covers.openlibrary.org/b/olid/{$book['cover_edition_key']}-M.jpg";
-                echo "<img src='$cover_url' alt='Book Cover'>";
+            echo "<div class='book-container' onclick='showBookDetails(\"{$book['id']}\")'>";
+              // Check if volumeInfo exists and fetch image links
+              if (isset($book['volumeInfo']['imageLinks']['thumbnail'])) {
+                echo "<img src='" . $book['volumeInfo']['imageLinks']['thumbnail'] . "' alt='Book Cover'>";
             } else {
-                // Display a default image icon if no cover image is available
                 echo "<img src='default_image_icon.jpg' alt='Book image not found!'>";
             }
-            
-            echo "<div class='book-details'>";
-            echo "<h3>" . $book['title'] . "</h3>";
-            
-           // Check if the "author_name" key exists and is an array
-           if (isset($book['author_name']) && is_array($book['author_name'])) {
-               echo "<p>Author: " . implode(", ", $book['author_name']) . "</p>";
-                } else {
-                   echo "<p>Author(s): Unknown</p>";
-                      }
-            // Check if 'first_publish_year' key exists before accessing its value
-            if (isset($book['first_publish_year'])) {
-                echo "<p>Publish Year: " . $book['first_publish_year'] . "</p>";
+            // Check if volumeInfo exists and fetch title
+            if (isset($book['volumeInfo']['title'])) {
+                echo "<h3>" . $book['volumeInfo']['title'] . "</h3>";
+            } else {
+                echo "<h3>Title Not Available</h3>";
+            }
+            // Check if volumeInfo exists and fetch authors
+            if (isset($book['volumeInfo']['authors'])) {
+                echo "<p>Author(s): " . implode(", ", $book['volumeInfo']['authors']) . "</p>";
+            } else {
+                echo "<p>Author(s): Unknown</p>";
+            }
+            // Check if volumeInfo exists and fetch published date
+            if (isset($book['volumeInfo']['publishedDate'])) {
+                echo "<p>Publish Year: " . $book['volumeInfo']['publishedDate'] . "</p>";
             } else {
                 echo "<p>Publish Year: Unknown</p>";
             }
-            
-            echo "</div>"; // close book-details div
+          
             echo "</div>"; // close book-container div
         }
         echo "</div>"; // close book-list div
     }
-    // Remove the loading animation after displaying results
     echo "<script>document.querySelector('.loader').style.display = 'none';</script>";
 }
 ?>
 
 </div>
-<?php include("body/footer.php"); ?>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Hide the loader when the document is loaded
-  document.querySelector('.loader').style.display = 'none';
-});
-
-// Show the loader when the search button is clicked
-document.querySelector('form').addEventListener('submit', function() {
-  document.querySelector('.loader').style.display = 'block';
-});
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('.loader').style.display = 'none';
+    });
+    document.querySelector('form').addEventListener('submit', function () {
+        document.querySelector('.loader').style.display = 'block';
+    });
+    
 </script>
+<?php include("body/footer.php"); ?>
 </body>
 </html>

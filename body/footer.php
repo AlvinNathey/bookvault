@@ -12,7 +12,7 @@
     </div>
 </div>
 <style>
-        .footer {
+ .footer {
     position: relative;
     bottom: 0;
     left: 0;
