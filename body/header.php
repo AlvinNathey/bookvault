@@ -14,7 +14,7 @@
 
 		<div class="wrapper">
 
-			<h1 class="branding-title"><a href="/">Personal Media Library</a></h1>
+			<h1 class="branding-title"><a href="homepage.php"></a></h1>
 
 			<ul class="nav">
                 
