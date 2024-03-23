@@ -41,18 +41,17 @@
         <p class="text-sm text-slate-500"><?php echo $bookDescription; ?></p>
         <br><br>
         <div class="flex items-center space-x-4 mb-5 text-sm font-medium">
-    <button class="flex-none w-1/2 h-12 uppercase font-medium tracking-wider bg-slate-900 text-white" type="submit">Want to read</button>
-    <button class="flex-none w-1/2 h-12 uppercase font-medium tracking-wider border border-slate-200 text-slate-900" type="button">Have read</button>
-    <button class="flex-none flex items-center justify-center w-12 h-12 text-slate-300 border border-slate-200" type="button" aria-label="Like"> 
-        <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-        </svg>
-    </button>
-</div>
+            <form action="toread-view.php" method="post">
+                <input type="hidden" name="bookImage" value="<?php echo htmlspecialchars($bookImage); ?>">
+                <input type="hidden" name="bookTitle" value="<?php echo htmlspecialchars($bookTitle); ?>">
+                <input type="hidden" name="bookAuthors" value="<?php echo htmlspecialchars($bookAuthors); ?>">
+                <input type="hidden" name="bookPublishedDate" value="<?php echo htmlspecialchars($bookPublishedDate); ?>">
+                <button class="flex-none w-full h-12 uppercase font-medium tracking-wider bg-black text-white hover:bg-white hover:text-black" type="submit">Want to read</button>
 
-    
+            </form>
+            <!-- Other buttons omitted for brevity -->
+        </div>
     </div>
-
     <?php
         } else {
             echo '<p class="flex-auto p-6">Book details not found.</p>';

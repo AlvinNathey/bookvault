@@ -19,18 +19,18 @@
 			<ul class="nav">
                 
                 <li class="books">
-                    <a href="catalog.php?cat=books">
+                    <a href="haveread.php">
                         <i class="fa-solid fa-book">
 
                         </i>    Have Read</a></li>
 
                 <li class="movies">
-                    <a href="catalog.php?cat=movies">
+                    <a href="toread-view.php">
                         <i class="fa-solid fa-bookmark">
                      </i>   Want To Read</a></li>
 
-                <li class="music">
-                    <a href="catalog.php?cat=music">
+                <li class="music"> 
+                    <a href="favourite.php">
                         <i class="fa-solid fa-star">
                     </i>    Favourites</a></li>
 

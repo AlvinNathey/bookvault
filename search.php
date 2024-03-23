@@ -12,14 +12,14 @@
   margin-top: 30px;
 }
 input[type="text"] {
-  width: 80%;
+  width: 40%;
   padding: 15px;
   border-radius: 10px;
   font-size: 15px;
   border: 1px solid #ccc;
 }
 button {
-  padding: 20px 30px 50px 30px;
+  padding: 15px 10px 15px 10px;
   background-color: #708ee6;
   color: white;
   border: none;
