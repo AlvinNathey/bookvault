@@ -12,7 +12,7 @@
 <?php include("body/header.php"); ?>
 
 <div class="max-w-xl mx-auto">
-    <h2 class="text-3xl font-bold mt-8 mb-4">Books to Read</h2>
+    <h2 class="text-3xl font-bold mt-8 mb-4">Books I want to read</h2>
     <?php
     // Include the database connection file
     include('connection.php');
