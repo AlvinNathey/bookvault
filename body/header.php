@@ -30,7 +30,7 @@
                      </i>   Want To Read</a></li>
 
                 <li class="music"> 
-                    <a href="favourite.php">
+                    <a href="favourite-view.php">
                         <i class="fa-solid fa-star">
                     </i>    Favourites</a></li>
 
