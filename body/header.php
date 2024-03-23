@@ -19,7 +19,7 @@
 			<ul class="nav">
                 
                 <li class="books">
-                    <a href="haveread.php">
+                    <a href="haveread-view.php">
                         <i class="fa-solid fa-book">
 
                         </i>    Have Read</a></li>

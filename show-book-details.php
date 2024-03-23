@@ -10,6 +10,16 @@
     <!-- Include Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+  <script>
+    function submitFormAndRedirect(formId, redirectUrl) {
+        document.getElementById(formId).submit(); // Submit the form
+
+        // Redirect after a short delay (e.g., 500 milliseconds)
+        setTimeout(function() {
+            window.location.href = redirectUrl;
+        }, 500);
+    }
+</script>
 <body>
 <?php include("body/header.php"); ?>
 
@@ -41,15 +51,22 @@
         <p class="text-sm text-slate-500"><?php echo $bookDescription; ?></p>
         <br><br>
         <div class="flex items-center space-x-4 mb-5 text-sm font-medium">
-            <form action="toread-view.php" method="post">
-                <input type="hidden" name="bookImage" value="<?php echo htmlspecialchars($bookImage); ?>">
-                <input type="hidden" name="bookTitle" value="<?php echo htmlspecialchars($bookTitle); ?>">
-                <input type="hidden" name="bookAuthors" value="<?php echo htmlspecialchars($bookAuthors); ?>">
-                <input type="hidden" name="bookPublishedDate" value="<?php echo htmlspecialchars($bookPublishedDate); ?>">
-                <button class="flex-none w-full h-12 uppercase font-medium tracking-wider bg-black text-white hover:bg-white hover:text-black" type="submit">Want to read</button>
-
-            </form>
+        <form id="wantToReadForm" action="toread-pass.php" method="post">
+    <input type="hidden" name="bookImage" value="<?php echo htmlspecialchars($bookImage); ?>">
+    <input type="hidden" name="bookTitle" value="<?php echo htmlspecialchars($bookTitle); ?>">
+    <input type="hidden" name="bookAuthors" value="<?php echo htmlspecialchars($bookAuthors); ?>">
+    <input type="hidden" name="bookPublishedDate" value="<?php echo htmlspecialchars($bookPublishedDate); ?>">
+    <button onclick="submitFormAndRedirect('wantToReadForm', 'toread-view.php')" class="flex-none w-full h-12 uppercase font-medium tracking-wider bg-black text-white hover:bg-white hover:text-black" type="button">Want to read</button>
+</form>
             <!-- Other buttons omitted for brevity -->
+            <form id="haveReadForm" action="haveread-pass.php" method="post">
+    <input type="hidden" name="bookImage" value="<?php echo htmlspecialchars($bookImage); ?>">
+    <input type="hidden" name="bookTitle" value="<?php echo htmlspecialchars($bookTitle); ?>">
+    <input type="hidden" name="bookAuthors" value="<?php echo htmlspecialchars($bookAuthors); ?>">
+    <input type="hidden" name="bookPublishedDate" value="<?php echo htmlspecialchars($bookPublishedDate); ?>">
+    <button onclick="submitFormAndRedirect('haveReadForm', 'haveread-view.php')" class="flex-none w-full h-12 uppercase font-medium tracking-wider bg-black text-white hover:bg-white hover:text-black" type="button">Have read</button>
+</form>
+
         </div>
     </div>
     <?php

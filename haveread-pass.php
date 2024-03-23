@@ -11,13 +11,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bookPublishedDate = $_POST['bookPublishedDate'];
 
     // Prepare and execute the SQL statement to insert the data into the table using prepared statements
-    $sql = "INSERT INTO `want-to-read` (`book-img`, `book-title`, `book-author`, `book-date`) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO `haveread` (`book-img`, `book-title`, `book-author`, `book-date`, `timestamp`) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssss", $bookImage, $bookTitle, $bookAuthors, $bookPublishedDate);
 
     if ($stmt->execute()) {
        // Redirect to haveread-view.php after successful insertion
-       header("Location: toread-view.php");
+       header("Location: haveread-view.php");
        exit();
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
