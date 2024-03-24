@@ -8,7 +8,7 @@
             <li><a href="https://www.instagram.com"><i class="fa-brands fa-instagram"></i>Instagram</a></li>
             <li><a href="https://www.youtube.com"><i class="fa-brands fa-youtube"></i>YouTube</a></li>
         </ul>
-        <p>&copy;<?php echo date("d , M Y"); ?> BookVault</p>
+        <p>&copy;<?php echo date(" d, M Y"); ?> BookVault</p>
     </div>
 </div>
 <style>
