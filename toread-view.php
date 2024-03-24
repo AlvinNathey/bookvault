@@ -47,7 +47,7 @@
                         <img src="<?php echo $bookImage; ?>" alt="Book Cover" class="w-16 h-auto mr-4">
                         <div>
                             <h3 class="text-lg font-semibold"><?php echo $bookTitle; ?></h3>
-                            <p class="text-sm text-gray-500">By <?php echo $bookAuthors; ?> | Published Date: <?php echo $bookPublishedDate; ?></p>
+                            <p class="text-sm text-gray-500">By <?php echo $bookAuthors; ?> <br> Published Date: <?php echo $bookPublishedDate; ?></p>
                         </div>
                     </div>
                 </div>
