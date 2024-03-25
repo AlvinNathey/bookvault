@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Book Collection</title>
+    <title>Home page</title>
     <link rel="stylesheet" href="css/style.css" type="text/css">
     
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        
 .book {
     padding: 10px;
     border: 1px solid #ccc; 
@@ -28,16 +27,26 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
+    
 }
 .book-fav {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px; 
 }
+/* Add rounded borders to books you've read and want to read */
+.book-read,
+.book-want {
+    border-radius: 20px;
+    border-color: black; 
+}
  </style>
 </head>
 <body>
 <?php include("body/header.php"); ?>
+
+<img src="vaultimg.png" alt="Book Vault" class="w-full h-auto" style="margin-top: -40px;">
+
 
 <div class="max-w-xl mx-auto">
 <h1 class="text-3xl font-bold mt-8 mb-4 text-center">My Book Collection</h1>
@@ -92,7 +101,7 @@
         if ($result->num_rows > 0) {
           
             while ($row = $result->fetch_assoc()) {
-                displayBook($row);
+                displayBook($row, 'book-want');
             }
         } else {
             echo '<p class="text-gray-600">No books added to read list yet.</p>';
@@ -112,7 +121,7 @@
         if ($result->num_rows > 0) {
          
             while ($row = $result->fetch_assoc()) {
-                displayBook($row);
+                displayBook($row, 'book-read');
             }
         } else {
             echo '<p class="text-gray-600">No books added to your read list yet.</p>';
@@ -126,10 +135,10 @@
 
 <?php
 // Function to display book details
-function displayBook($row) {
+function displayBook($row, $bookClass) {
     // Check if any essential fields are empty
     if (!empty($row["book-img"]) && !empty($row["book-title"]) && !empty($row["book-author"]) && !empty($row["book-date"])) {
-        echo '<div class="book">';
+        echo '<div class="book ' . $bookClass . '">';
         echo '<div class="flex items-center mb-4">';
         echo '<img src="' . $row["book-img"] . '" alt="Book Cover" class="w-16 h-auto mr-4">';
         echo '<div>';
