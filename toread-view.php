@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books to Read</title>
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <!-- Include Tailwind CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         /* Additional CSS for styling book containers */
@@ -15,8 +15,8 @@
             justify-content: space-between;
         }
         .book {
-            width: 48%; /* Adjust as needed */
-            margin-bottom: 20px; /* Adjust as needed */
+            width: 48%; 
+            margin-bottom: 20px; 
         }
     </style>
 </head>
@@ -27,15 +27,15 @@
     <h2 class="text-3xl font-bold mt-8 mb-4">Books I want to read</h2>
     <div class="book-container">
         <?php
-        // Include the database connection file
+      
         include('connection.php');
 
-        // Select all records from the want-to-read table
+       
         $sql = "SELECT * FROM `want-to-read`";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            // Output data of each row
+            
             while ($row = $result->fetch_assoc()) {
                 $bookImage = $row["book-img"];
                 $bookTitle = $row["book-title"];
@@ -57,7 +57,7 @@
             echo '<p class="text-gray-600">No books added to read list yet.</p>';
         }
 
-        // Close the database connection
+       
         $conn->close();
         ?>
     </div>

@@ -13,7 +13,7 @@
     border: 1px solid #ccc; 
 }
 .book img {
-    width: 30%; /*resizing of image */
+    width: 30%;
     height: auto; 
 }
 
@@ -34,7 +34,7 @@
     border: 1px solid #ccc;
     border-radius: 10px; 
 }
-/* Add rounded borders to books you've read and want to read */
+
 .book-read,
 .book-want {
     border-radius: 20px;
@@ -45,7 +45,7 @@
 <body>
 <?php include("body/header.php"); ?>
 
-<img src="vaultimg.png" alt="Book Vault" class="w-full h-auto" style="margin-top: -40px;">
+<img src="img/vaultimg.png" alt="Book Vault" class="w-full h-auto" style="margin-top: -40px;">
 
 
 <div class="max-w-xl mx-auto">

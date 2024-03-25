@@ -32,11 +32,11 @@ button {
   border-radius: 10px;
   margin: 10px;
   padding: 10px;
-  cursor: pointer; /* Add cursor pointer for clickable effect */
+  cursor: pointer; 
 }
 .book-container img {
-  width: 200px; /* Adjust the image size as needed */
-  height: 300px; /* Adjust the image size as needed */
+  width: 200px; 
+  height: 300px; 
   display: block;
   margin: 0 auto 10px;
 }
@@ -45,14 +45,14 @@ button {
 }
 /* Add this CSS for the loader */
 .loader {
-  border: 6px solid #f3f3f3; /* Light grey */
+  border: 6px solid lightcyan; /* Light grey for the background */
   border-top: 6px solid #3498db; /* Blue */
-  border-radius: 50%;
+  border-radius: 70%;
   width: 30px;
   height: 30px;
   animation: spin 1s linear infinite;
   margin: 0 auto;
-  display: none; /* Hide initially */
+  display: none; 
 }
 
 @keyframes spin {
@@ -130,9 +130,9 @@ if (isset($_GET['submit-search'])) {
                 echo "<p>Publish Year: Unknown</p>";
             }
           
-            echo "</div>"; // close book-container div
+            echo "</div>"; 
         }
-        echo "</div>"; // close book-list div
+        echo "</div>"; 
     }
     echo "<script>document.querySelector('.loader').style.display = 'none';</script>";
 }

@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books I've read</title>
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <!-- Include Tailwind CSS -->
+   
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        /* Additional CSS for styling book containers */
+        
         .book-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
         }
         .book {
-            width: 50%; /* Adjust as needed */
-            margin-bottom: 30px; /* Adjust as needed */
+            width: 50%; 
+            margin-bottom: 30px; 
         }
     </style>
 </head>
@@ -27,14 +27,14 @@
     <h2 class="text-3xl font-bold mt-8 mb-4">Books I've read</h2>
     <div class="book-container">
         <?php
-        // Include the database connection file
+        
         include_once 'connection.php';
 
-        // Select all records from the haveread table
+     
         $sql = "SELECT * FROM `haveread`";
         $result = $conn->query($sql);
 
-        // Check if there are any records
+       
         if ($result->num_rows > 0) {
             // Output data of each row
             while ($row = $result->fetch_assoc()) {
@@ -44,7 +44,7 @@
                 $bookPublishedDate = $row["book-date"];
                 $timestamp = $row["timestamp"]; // Get the timestamp from the database
 
-                // Display book details along with the timestamp
+               
                 ?>
                 <div class="book">
                     <div class="flex items-center">
@@ -71,11 +71,11 @@
                 <?php
             }
         } else {
-            // If there are no records, display a message
+           
             echo '<p class="text-gray-600">No books added to read list yet.</p>';
         }
 
-        // Close the database connection
+     
         $conn->close();
         ?>
     </div>

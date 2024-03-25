@@ -30,18 +30,18 @@ summary {
     font: 0/0 serif;
     text-shadow: none; 
     color: transparent; 
-    width: 120px; /* Adjusted width to a smaller size */
-    height: 100px; /* Adjusted height to a smaller size */
-    background: url(../img/book-vault-logo.png) 0px no-repeat; /* Adjusted background position */
-    background-size: 119px auto; /* Increase the size of the background image */
+    width: 120px; 
+    height: 100px; 
+    background: url(../img/book-vault-logo.png) 0px no-repeat; 
+    background-size: 119px auto; 
     padding: 0;
-    cursor: pointer; /* Set cursor to pointer */
+    cursor: pointer; 
 }
 
 .header .branding-title a {
     display: block;
     width: 100%;
-    height: 100%; /* Set the height to match the branding-title height */
+    height: 100%; 
 }
 
 .header .nav {
@@ -52,14 +52,14 @@ summary {
     position: relative;
     left: 0px;
     z-index: 99999999;
-    white-space: nowrap; /* Prevent line breaks */
+    white-space: nowrap; 
 }
 
 .header .nav li {
     display: inline-block;
     margin: 0;
     list-style: none;
-    margin-right: 20px; /* Set equal margin-right */
+    margin-right: 20px;
 }
 
 .header .nav li a {
@@ -69,11 +69,11 @@ summary {
     padding: 2px 0 0;
     width: 100px;
     background: url('../img/book-vault-logo.png') no-repeat 0px 60px;
-    white-space: nowrap; /* Prevent line breaks */
-    text-align: center; /* Center align the text */
+    white-space: nowrap; 
+    text-align: center; 
     text-transform: uppercase;
     letter-spacing: 1.3px;
-    text-decoration: none; /* Remove underline */
+    text-decoration: none; 
     cursor: pointer;
 }
 
@@ -88,29 +88,29 @@ summary {
 .header .nav li.muzic a:active,
 .header .nav li.suggest:hover a,
 .header .nav li.suggest a:active {
-    opacity: 0.2; /* Adjust the opacity value as needed */
+    opacity: 0.2; 
 }
 
 
 .books a {
-    float: right; /* Float the anchor element to the right */
-    margin-left: 70px; /* Adjust margin as needed */
+    float: right; 
+    margin-left: 70px; 
 }
 .movies a {
-    float: right; /* Float the anchor element to the right */
-    margin-left: 70px; /* Adjust margin as needed */
+    float: right; 
+    margin-left: 70px;
 }
 .music a {
-    float: right; /* Float the anchor element to the right */
-    margin-left: 70px; /* Adjust margin as needed */
+    float: right; 
+    margin-left: 70px; 
 }
 .muzic a {
-    float: right; /* Float the anchor element to the right */
-    margin-left: 70px; /* Adjust margin as needed */
+    float: right; 
+    margin-left: 70px;
 }
 .suggest a {
-    float: right; /* Float the anchor element to the right */
-    margin-left: 70px; /* Adjust margin as needed */
+    float: right;
+    margin-left: 70px; 
 }
 
 

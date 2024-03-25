@@ -17,16 +17,16 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 0px; /* Adjust the width as needed */
-    background-color: #f8f9fa; /* Adjust the background color as needed */
-    padding: 50px 0; /* Adjust the padding as needed */
+    height: 0px; 
+    background-color: #f8f9fa; 
+    padding: 50px 0;
     text-align: center;
     font-size: 12px;
-    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow effect */
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .wrapper {
-    max-width: 100%; /* Adjust the maximum width as needed */
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -37,16 +37,16 @@ ul {
 
 ul li {
     display: inline-block;
-    margin-right: 20px; /* Adjust the spacing between social media icons as needed */
+    margin-right: 20px; 
 }
 
 ul li a {
     text-decoration: none;
-    color: #333; /* Adjust the color as needed */
+    color: #333;
 }
 
 ul li a:hover {
-    color: #bc1520; /* Adjust the hover color as needed */
+    color: #bc1520;
 }
 
       </style>

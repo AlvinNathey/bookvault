@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Include Tailwind CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
   <script>
     function submitFormAndRedirect(formId, redirectUrl) {
-        document.getElementById(formId).submit(); // Submit the form
+        document.getElementById(formId).submit(); 
 
-        // Redirect after a short delay (e.g., 500 milliseconds)
+       
         setTimeout(function() {
             window.location.href = redirectUrl;
         }, 500);
@@ -58,7 +58,7 @@
     <input type="hidden" name="bookPublishedDate" value="<?php echo htmlspecialchars($bookPublishedDate); ?>">
     <button onclick="submitFormAndRedirect('wantToReadForm', 'toread-view.php')" class="flex-none w-full h-12 uppercase font-medium tracking-wider bg-black text-white hover:bg-white hover:text-black" type="button">Want to read</button>
 </form>
-            <!-- Other buttons omitted for brevity -->
+            
             <form id="haveReadForm" action="haveread-pass.php" method="post">
     <input type="hidden" name="bookImage" value="<?php echo htmlspecialchars($bookImage); ?>">
     <input type="hidden" name="bookTitle" value="<?php echo htmlspecialchars($bookTitle); ?>">
