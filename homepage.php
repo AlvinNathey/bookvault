@@ -22,7 +22,12 @@
         width: calc(50% - 20px); 
     }
 }
-/* CSS code for arranging favorite books in a grid of 3 by 3*/
+.book-container-fav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: start; /* Align items to the start */
+}
 .book-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
@@ -33,6 +38,9 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px; 
+    display: inline-block; /* Add this line */
+    width: 200px; /* Add this line */
+    box-sizing: border-box; /* Add this line */
 }
 
 .book-read,
@@ -56,7 +64,7 @@
 
     <h3 class="text-2xl font-bold mt-8 mb-4 text-center">My Favorite Books</h3>
     <h3 class="text-2xl font-bold mt-8 mb-4"></h3>
-    <div class="book-container">
+    <div class="book-container-fav">
         <?php
        
         include_once 'connection.php';
@@ -71,15 +79,17 @@
               
                 ?>
 
-               <div class="book-fav">
-               <div class="flex items-center mb-4">
-                 <img src="<?php echo $row["book_img"]; ?>" alt="Book Cover" class="w-16 h-auto mr-4">
-               <div>
-            <h3 class="text-lg font-semibold"><?php echo $row["book_title"]; ?></h3>
-            <p class="text-sm text-gray-500">By: <?php echo $row["book_author"]; ?> </p>
-                      </div>
-                   </div>
-               </div>
+<div class="book-fav">
+    <div class="border p-4 rounded-lg">
+        <div class="flex items-center mb-4">
+            <img src="<?php echo $row["book_img"]; ?>" alt="Book Cover" class="w-16 h-auto mr-4">
+            <div>
+                <h3 class="text-lg font-semibold"><?php echo $row["book_title"]; ?></h3>
+                <p class="text-sm text-gray-500">By: <?php echo $row["book_author"]; ?> </p>
+            </div>
+        </div>
+    </div>
+</div>
                 <?php
             }
         } else {
