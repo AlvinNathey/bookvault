@@ -6,6 +6,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <style>
+        .header {
+    background: #f7f7f8;
+    border-bottom: 3px solid  #87CEEB;
+        }
+    .header .nav li a {
+    color: lightslategrey;
+    display: block;
+    line-height: 30px;
+    padding: 2px 0 0;
+    width: 100px;
+    background: url('../img/book-vault-logo.png') no-repeat 0px 60px;
+    white-space: nowrap; 
+    text-align: center; 
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    text-decoration: none; 
+    cursor: pointer;
+}
+
+        </style>
 </head>
 
 <body>
