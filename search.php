@@ -3,151 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Searching </title>
+<title>Searching</title>
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
-    form {
-  text-align: center;
-  margin-top: 30px;
+form {
+    position: relative; /* Make sure the form is positioned relative */
+    text-align: center;
+    margin-top: 30px;
 }
 input[type="text"] {
-  width: 40%;
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 15px;
-  border: 1px solid #ccc;
+    width: 40%;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    
 }
+
 button {
-  padding: 15px 10px 15px 10px;
-  background-color: #708ee6;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  margin-left: 10px;
+    padding: 15px 10px;
+    background-color: #708ee6;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-left: 10px;
 }
 .book-container {
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  margin: 10px;
-  padding: 10px;
-  cursor: pointer; 
-}
-.book-container img {
-  width: 200px; 
-  height: 300px; 
-  display: block;
-  margin: 0 auto 10px;
-}
-.book-details {
-  text-align: center;
-}
-/* Add this CSS for the loader */
-.loader {
-  border: 6px solid lightcyan; /* Light grey for the background */
-  border-top: 6px solid #3498db; /* Blue */
-  border-radius: 70%;
-  width: 30px;
-  height: 30px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto;
-  display: none; 
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    cursor: pointer;
+    width: 200px; /* Set a fixed width */
+    height: 350px; /* Set a fixed height */
+    overflow: hidden; /* Hide overflow */
+    vertical-align: top; /* Aligns containers properly */
+    text-align: center;
 }
 
+.book-container h3, .book-container p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.book-details {
+    text-align: center;
+}
+.loader {
+    border: 6px solid lightcyan;
+    border-top: 6px solid #3498db;
+    border-radius: 70%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+    display: none;
+}
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+}
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #d4d4d4;
+    background-color: #fff;
+    text-align: left;
+}
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+.autocomplete-items .autocomplete-active {
+    background-color: #d4d4d4;
 }
 </style>
-
-<script>
-// Function to show book details when a book is clicked
-function showBookDetails(bookId) {
-    window.location.href = 'show-book-details.php?bookId=' + bookId;
-}
-</script>
-
 </head>
 <body>
 <?php include("body/header.php"); ?>
 <div class="book-list">
 <form method="get" action="">
-    <input type="text" name="search" placeholder="Search for a book">
+    <input type="text" name="search" id="search-input" placeholder="Search for a book">
     <button type="submit" name="submit-search"><i class="fa-solid fa-search"></i></button>
+    <div id="autocomplete-list" class="autocomplete-items"></div>
 </form>
-
 
 <div class="loader"></div>
 
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+?>
 <?php
 function searchBooks($query) {
     $base_url = 'https://www.googleapis.com/books/v1/volumes?q=';
     $url = $base_url . urlencode($query);
     $response = file_get_contents($url);
     if ($response === false) {
+        echo "Failed to fetch data from Google Books API.";
         return false;
     }
     $data = json_decode($response, true);
     if (!$data || !isset($data['items'])) {
+        echo "No books found for the query: " . htmlspecialchars($query);
         return false;
     }
     return $data['items'];
 }
-if (isset($_GET['submit-search'])) {
+
+if (isset($_GET['search']) && !empty($_GET['search'])) {
     $query = $_GET['search'];
-    echo "<div class='loader'></div>";
     $books = searchBooks($query);
-    if ($books === false || empty($books)) {
-        echo "No books found for the query: $query";
-    } else {
+    if ($books) {
         echo "<div class='book-list'>";
-        echo "<h5 style='text-align: center'>Search Results for: $query</h5>";
+        echo "<h5 style='text-align: center'>Search Results for: " . htmlspecialchars($query) . "</h5>";
         foreach ($books as $book) {
-            echo "<div class='book-container' onclick='showBookDetails(\"{$book['id']}\")'>";
-              // Check if volumeInfo exists and fetch image links
-              if (isset($book['volumeInfo']['imageLinks']['thumbnail'])) {
-                echo "<img src='" . $book['volumeInfo']['imageLinks']['thumbnail'] . "' alt='Book Cover'>";
+            echo "<div class='book-container' onclick='showBookDetails(\"" . htmlspecialchars($book['id']) . "\")'>";
+            if (isset($book['volumeInfo']['imageLinks']['thumbnail'])) {
+                echo "<img src='" . htmlspecialchars($book['volumeInfo']['imageLinks']['thumbnail']) . "' alt='Book Cover'>";
             } else {
-                echo "<img src='default_image_icon.jpg' alt='Book image not found!'>";
+                echo "<img src='img/default.jpg' alt='Book image not found!' width='100' height='150'>";
+
             }
-            // Check if volumeInfo exists and fetch title
             if (isset($book['volumeInfo']['title'])) {
-                echo "<h3>" . $book['volumeInfo']['title'] . "</h3>";
+                echo "<h3>" . htmlspecialchars($book['volumeInfo']['title']) . "</h3>";
             } else {
                 echo "<h3>Title Not Available</h3>";
             }
-            // Check if volumeInfo exists and fetch authors
             if (isset($book['volumeInfo']['authors'])) {
-                echo "<p>Author(s): " . implode(", ", $book['volumeInfo']['authors']) . "</p>";
+                echo "<p>Author(s): " . implode(", ", array_map('htmlspecialchars', $book['volumeInfo']['authors'])) . "</p>";
             } else {
                 echo "<p>Author(s): Unknown</p>";
             }
-            // Check if volumeInfo exists and fetch published date
             if (isset($book['volumeInfo']['publishedDate'])) {
-                echo "<p>Publish Year: " . $book['volumeInfo']['publishedDate'] . "</p>";
+                echo "<p>Publish Year: " . htmlspecialchars($book['volumeInfo']['publishedDate']) . "</p>";
             } else {
                 echo "<p>Publish Year: Unknown</p>";
             }
-          
-            echo "</div>"; 
+            echo "</div>";
         }
-        echo "</div>"; 
+        echo "</div>";
     }
     echo "<script>document.querySelector('.loader').style.display = 'none';</script>";
 }
 ?>
 
+
 </div>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelector('.loader').style.display = 'none';
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const autocompleteList = document.getElementById('autocomplete-list');
+    const searchForm = document.querySelector('form');
+    const loader = document.querySelector('.loader'); // Get the loader element
+
+    // Listener for input on the search box
+    searchInput.addEventListener('input', function() {
+        let input = this.value;
+
+        // Clear the autocomplete list and hide if input length is less than 3
+        if (input.length < 3) {
+            autocompleteList.innerHTML = '';
+            return;
+        }
+
+        // Display the loader when starting to fetch data
+        loader.style.display = 'block';
+        console.log("Fetching books for:", input); // Debug log for input
+
+        // Fetch data from Google Books API
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(input)}&maxResults=5`)
+        .then(response => response.json())
+        .then(data => {
+            console.log("Data received:", data); // Debug log for fetched data
+            let books = data.items || [];
+            autocompleteList.innerHTML = '';
+
+            // Populate autocomplete list with fetched book titles
+            books.forEach(book => {
+                let title = book.volumeInfo.title;
+                let div = document.createElement('div');
+                div.textContent = title;
+                div.onclick = function() {
+                    console.log("Book clicked:", title); // Debug log for clicked book title
+                    searchInput.value = title;
+                    autocompleteList.innerHTML = '';
+                    searchForm.submit(); // Automatically submit the form on click
+                };
+                autocompleteList.appendChild(div);
+            });
+
+            // Hide the loader after processing data
+            loader.style.display = 'none';
+        })
+        .catch(error => {
+            console.error('Error fetching autocomplete suggestions:', error);
+            loader.style.display = 'none'; // Ensure loader is hidden on fetch error
+        });
     });
-    document.querySelector('form').addEventListener('submit', function () {
-        document.querySelector('.loader').style.display = 'block';
+
+    // Hide autocomplete list when clicking anywhere else on the body
+    document.body.addEventListener('click', function(event) {
+        if (event.target !== searchInput) {
+            autocompleteList.innerHTML = '';
+        }
     });
-    
+});
+
+// Function to redirect to show book details page
+function showBookDetails(bookId) {
+    window.location.href = 'show-book-details.php?bookId=' + bookId;
+}
 </script>
+
+
+
+
 <?php include("body/footer.php"); ?>
 </body>
 </html>
