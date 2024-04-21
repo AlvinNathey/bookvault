@@ -29,28 +29,49 @@ button {
     margin-left: 10px;
 }
 .book-container {
+    position: relative; /* Make sure the container is positioned */
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
     cursor: pointer;
-    width: 200px; /* Set a fixed width */
-    height: 350px; /* Set a fixed height */
-    overflow: hidden; /* Hide overflow */
-    vertical-align: top; /* Aligns containers properly */
-    text-align: center;
-}
-
-.book-container h3, .book-container p {
+    width: 200px;
+    height: 300px;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    vertical-align: top;
+    text-align: center;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
 }
 
-.book-details {
-    text-align: center;
+.book-container img {
+    width: 40%; /* Adjust image width to fit container */
+    height: auto;
+    transition: transform 0.3s ease; /* Smooth transition for scale effect */
 }
+
+.book-container:hover img {
+    transform: scale(1.1); /* Slightly scale up the image on hover */
+}
+
+.book-info {
+    position: absolute; /* Position the book details absolutely within the container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    color: #333;
+    visibility: hidden; /* Start with info hidden */
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+}
+
+.book-container:hover .book-info {
+    visibility: visible; /* Make details visible on hover */
+    opacity: 1;
+}
+
 .loader {
     border: 6px solid lightcyan;
     border-top: 6px solid #3498db;
@@ -103,6 +124,12 @@ button {
 </form>
 
 <div class="loader"></div>
+<div class='book-info'>
+        <h3>${htmlspecialchars($book['volumeInfo']['title'])}</h3>
+        <p>Author(s): ${implode(", ", array_map('htmlspecialchars', $book['volumeInfo']['authors']))}</p>
+        <p>Publish Year: ${htmlspecialchars($book['volumeInfo']['publishedDate'])}</p>
+    </div>
+</div>
 
 <?php
 ini_set('display_errors', 1);
