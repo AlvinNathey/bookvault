@@ -56,7 +56,11 @@
     <input type="hidden" name="bookTitle" value="<?php echo htmlspecialchars($bookTitle); ?>">
     <input type="hidden" name="bookAuthors" value="<?php echo htmlspecialchars($bookAuthors); ?>">
     <input type="hidden" name="bookPublishedDate" value="<?php echo htmlspecialchars($bookPublishedDate); ?>">
-    <button onclick="submitFormAndRedirect('wantToReadForm', 'toread-view.php')" class="flex-none w-full h-12 uppercase font-medium tracking-wider bg-black text-white hover:bg-white hover:text-black" type="button">Want to read</button>
+    <button onclick="submitFormAndRedirect('wantToReadForm', 'toread-view.php')"
+    class="flex-none w-full h-12 uppercase font-medium tracking-wider bg-green-500 text-white hover:bg-green-900 border border-green-500 hover:border-green-700 rounded-lg" 
+    type="button">Want to read</button>
+
+
 </form>
             
             <form id="haveReadForm" action="haveread-pass.php" method="post">
@@ -64,7 +68,10 @@
     <input type="hidden" name="bookTitle" value="<?php echo htmlspecialchars($bookTitle); ?>">
     <input type="hidden" name="bookAuthors" value="<?php echo htmlspecialchars($bookAuthors); ?>">
     <input type="hidden" name="bookPublishedDate" value="<?php echo htmlspecialchars($bookPublishedDate); ?>">
-    <button onclick="submitFormAndRedirect('haveReadForm', 'haveread-view.php')" class="flex-none w-full h-12 uppercase font-medium tracking-wider bg-black text-white hover:bg-white hover:text-black" type="button">Have read</button>
+    <button onclick="submitFormAndRedirect('haveReadForm', 'haveread-view.php')"
+    class="flex-none w-full h-12 uppercase font-medium tracking-wider bg-blue-400 text-black hover:bg-blue-800 hover:text-white border border-black hover:border-black rounded-lg" 
+    type="button">Have read</button>
+
 </form>
 
         </div>
